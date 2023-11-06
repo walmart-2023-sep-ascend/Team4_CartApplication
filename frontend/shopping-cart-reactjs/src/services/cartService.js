@@ -1,0 +1,36 @@
+import axios from "axios";
+
+const CART_SERVICE_URL="http://localhost:8080/cart/fetchCartDetails/user/2";
+const ADD_SERVICE_URL="http://localhost:8080/cart/addToCart";
+const date = new Date();
+class CartService{
+
+    getCart(){
+        return axios.get(CART_SERVICE_URL);
+    }
+
+    addItems(){
+        return axios({
+            method: 'post',
+            url: ADD_SERVICE_URL,
+            headers: {}, 
+            data: {
+             userId:1,
+             date :date,
+             promoCode : "TESTCODE",
+             products :[
+                {
+                    id:1,
+                    quantity:9
+
+                }
+             ]
+            }
+          });
+    }
+
+}
+
+
+
+export default new CartService();
