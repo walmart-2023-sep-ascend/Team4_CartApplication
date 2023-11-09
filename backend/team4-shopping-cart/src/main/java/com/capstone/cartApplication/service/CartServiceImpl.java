@@ -62,7 +62,6 @@ public class CartServiceImpl extends Exception   implements CartService {
 		}
 
 		if(c!=null && c.get_id()!=null) { // Update Cart 
-			List<Products> newProductList = new ArrayList<Products>();
 			List<Products> dbProductList = c.getProducts();
 			List<Products> reqProdList = cartRequest.getProducts();
 
@@ -70,20 +69,21 @@ public class CartServiceImpl extends Exception   implements CartService {
 			{
 				for (Products dbProduct : dbProductList)
 				{
+					logger.info("db product "+ dbProduct.getId());
 					boolean  isItemAvailable =isProductAvailable(reqProduct);	
 					logger.info("Is Product is available "+ isItemAvailable);
 					if( isItemAvailable) {
 						if (dbProduct.getId().equals(reqProduct.getId()))
 						{
 							dbProduct.setQuantity(reqProduct.getQuantity());
-							newProductList.add(dbProduct);
+							dbProductList.add(dbProduct);
 							break;
 						}else {
 							//System.out.println("creating new product  ---->"+dbProduct.getId());
 							Products p = new Products();
 							p.setId(reqProduct.getId());
 							p.setQuantity(reqProduct.getQuantity());
-							newProductList.add(p);
+							dbProductList.add(p);
 							break;
 						}
 					}else {
@@ -91,7 +91,7 @@ public class CartServiceImpl extends Exception   implements CartService {
 					}
 				}
 			}
-			c.setProduct(newProductList);
+			c.setProduct(dbProductList);
 
 			return cartRepository.save(c);
 		}else { // Create Cart
