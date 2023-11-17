@@ -9,7 +9,10 @@ class CartService{
         return axios.get(CART_SERVICE_URL);
     }
 
-    addItems(){
+
+    addItems(course,quantity){
+        console.log("product",course.id);
+        console.log("inside addItems",quantity);
         return axios({
             method: 'post',
             url: ADD_SERVICE_URL,
@@ -20,13 +23,15 @@ class CartService{
              promoCode : "TESTCODE",
              products :[
                 {
-                    id:1,
-                    quantity:9
+                    id:course.id,
+                    quantity:quantity
 
                 }
              ]
             }
           });
+
+          console.log("inside cartservice")
     }
 
 }

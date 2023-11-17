@@ -1,33 +1,8 @@
-//components/UserCartComponent.js
- 
 
 import React, {Component,useEffect, useState} from 'react'
+import cartService from '../services/cartService';
 
-function App() {
-const [posts, setPosts] = useState([])
 
-const createPost = async () => {
-    const url = "http://localhost:8080/cart/fetchCartDetails"
-    const data = { "userId": 1}
-    try {
-      const response = await fetch(url, {
-        method: "GET",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      if (!response.ok) {
-        throw Error(response.statusText)
-      }
-      const json = await response.json()
-      setPosts()
-      console.log(json)
-    } catch (error) {
-      console.error(error.message)
-    }
-  }
-}
  
 function UserCartComponent({
     cartCourses,
@@ -41,7 +16,6 @@ function UserCartComponent({
 
 return (
 <div className={`cart ${cartCourses.length > 0 ? 'active' : ''}`}>
-  
    <h2>My Cart</h2>
   
     {cartCourses.length === 0 ? (

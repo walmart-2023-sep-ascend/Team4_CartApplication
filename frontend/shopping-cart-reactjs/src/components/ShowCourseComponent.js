@@ -11,25 +11,9 @@ function ShowCourseComponent({ courses,
     addCourseToCartFunction }) {
 
 
-    // logic to fetch & add to user cart details
-        const [cart, setCart] = useState([])
-        const [aItem, setItem] = useState([])
-        const getCart =()=>{
-            cartService.getCart().then((response) => {
-                setCart(response.data)
-                console.log(response.data);
-            });
-        };
-        const addItem =() =>{
-            cartService.addItems().then((response) => {
-                setItem(response.data)
-                console.log(response.data);
-            });
-        };
+   
+       
         
-        useEffect(() => {
-            getCart()
-          }, [])
 
 
 
@@ -59,10 +43,6 @@ function ShowCourseComponent({ courses,
                         >
                             Add Item
                         </button>
-                            
-                        <div>
-                        <button onClick={addItem}>AddToCart</button>
-                            </div>
                     </div>
                    
                 ))
