@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const CART_SERVICE_URL="http://localhost:8080/cart/fetchCartDetails/user/2";
+const CART_SERVICE_URL="http://localhost:8080/cart/fetchCartDetails/user/1";
 const ADD_SERVICE_URL="http://localhost:8080/cart/addToCart";
 const date = new Date();
 class CartService{
@@ -34,6 +34,7 @@ class CartService{
     }
 
 }
+
 
 
 

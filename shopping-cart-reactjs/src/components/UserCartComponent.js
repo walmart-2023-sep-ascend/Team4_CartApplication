@@ -12,6 +12,7 @@ function UserCartComponent({
     saveForLaterFunction,
     removeFromCartFunction,
     setCartCourses,
+    getCart
 }) {
 
 return (
@@ -29,8 +30,7 @@ return (
     </div>
     <div className="offer-cart1"> 
     <span>Order  within  3  hr 17  min </span>
-    </div>
-    
+    </div>  
         {cartCourses.map((item) => (
             
             <li key={item.product.id} className="cart-item">

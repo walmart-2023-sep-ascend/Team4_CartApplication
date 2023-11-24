@@ -7,6 +7,7 @@ import cartService from './services/cartService';
 import axios from "axios";
 const date = new Date();
 
+
 //import TotalCartComponent from './components/TotalCartComponent';
  
 function App() {
@@ -59,19 +60,27 @@ function App() {
     //Add items to cart
     const [cart, setCart] = useState([]);
     const [aItem, setCartItem] = useState([])
+    const [itemList, setItemList] = useState([])
+    //need to remove after product listing API integration
+    const [commonItems, setCommonItems] = useState([]);
+    const [dataArray, setDataArray] = useState([]);
+
 
 
     const getCart =()=>{
       cartService.getCart().then((response) => {
           setCart(response.data)
-          console.log("--Usercart --",response.data);
+          setItemList(response.data.products)
+          fetchCartFunction(response.data.products)
+          
+          //console.log("--Usercart --",response.data);
       });
     };
   
   
     useEffect(() => {
       getCart()
-    }, [])
+    }, [2])
 
     const addItem =(course,quantity) =>{
       cartService.addItems(course,quantity).then((response) => {
@@ -81,10 +90,29 @@ function App() {
       });
     };
     
- 
+
+    const fetchCartFunction = (userCartItems) => {
+      const id = 'id';
+      const commonItems = courses.filter(item1 =>
+        userCartItems.some(item2 => item2[id] === item1[id])
+      ); 
+
+      const updatedCommonItems = commonItems.map(item1 => {
+        const correspondingItem2 = userCartItems.find(item2 => item2.id === item1.id);
+        return {
+          ...item1,
+          qty: correspondingItem2 ? correspondingItem2.quantity : 0,
+        };
+      });
+      
+      const buildUserCartArr = updatedCommonItems.map(item => ({ product: { ...item },quantity:item.qty }));
+      setCartCourses(buildUserCartArr)
+  };
+
+  
     const addCourseToCartFunction = (course) => {
-        const alreadyCourses = cartCourses
-                               .find(item => item.product.id === course.id);
+          const alreadyCourses = cartCourses
+                                .find(item => item.product.id === course.id);
         if (alreadyCourses) {
             const latestCartUpdate = cartCourses.map(item =>
                 item.product.id === course.id ? 
@@ -92,11 +120,10 @@ function App() {
                 ...item, quantity: item.quantity + 1,  
               }
                 : item,
-            );
-
-            console.log("itemQty",alreadyCourses.quantity+1)
+            );  
             {addItem(course,alreadyCourses.quantity)} ;
             setCartCourses(latestCartUpdate);
+          
             
         } else {
             setCartCourses([...cartCourses, {product: course, quantity: 1}]);
@@ -159,6 +186,7 @@ function App() {
                     totalAmountCalculationFunction={
                         totalAmountCalculationFunction
                     }
+                    getCart={setCart}
                     setCartCourses={setCartCourses}
                   
                 />
@@ -178,6 +206,9 @@ function App() {
                   
                     
                 />
+
+
+
             </div>
         
     );
