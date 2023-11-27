@@ -15,22 +15,36 @@ function UserCartComponent({
     getCart
 }) {
 
+    
+    const [showPopup, setShowPopup] = useState(false);
+
 return (
 <div className={`cart ${cartCourses.length > 0 ? 'active' : ''}`}>
    <h2>My Cart</h2>
+
+   
   
     {cartCourses.length === 0 ? (
+
+        
     <p className="empty-cart"> your cart is empty</p>
     ) : (     
 <div>
     <ul>
+    <ul>
+    <h5><img 
+        src="//i5.walmartimages.com/dfw/63fd9f59-1b5e/5452ae02-a31f-4ef1-9a45-62ac0b06c13b/v1/mci-shipping.svg" alt="fulfillment logo" width="64" height="64" class="db h-auto"/> Free Shipping </h5>
     
-    <div className="offer-cart1"> 
-    <span>Free shipping, arrives  tomorrow,  Oct 14 </span> 
-    </div>
-    <div className="offer-cart1"> 
-    <span>Order  within  3  hr 17  min </span>
-    </div>  
+
+    <p>
+                  <strong>Expected shipping delivery (25.11.2023 - 01.12.2023)</strong>
+                </p>
+                
+    </ul>
+    
+    
+  <div title="Title" />;
+
         {cartCourses.map((item) => (
             
             <li key={item.product.id} className="cart-item">
@@ -43,7 +57,7 @@ return (
                         </div>
                         <div className="item-details">
                             <h3>{item.product.name}</h3>
-                            <p>Price: ₹{item.product.price}</p>
+                            <p>Price: ₹{item.product.price} </p> 
                             
                             
                             
@@ -51,6 +65,23 @@ return (
             <p className="offer-cart"> Size: S </p>
             <p className="offer-cart"> Free Holiday returns until Jan 31 </p>
             
+            <div className="info-circle" onClick={() => setShowPopup(true)}>
+        <p className="info-circle-inner"> i </p> Eligible Promotions
+    
+</div>
+{showPopup && (
+  <div className="popup-message">
+    <img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" class="_3HLfAg"></img>  5% Cashback on Flipkart Axis Bank Card.
+    <div>
+    <img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" class="_3HLfAg"></img>  10% off on Citi Credit Card EMI Transactions.
+    </div>
+    <div>
+    <img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" class="_3HLfAg"></img>  Buy for 150 get ₹100 off your Next Buy.
+   </div>
+   
+   <button onClick={() => setShowPopup(false)}>Close</button>
+  </div>
+)}
             
                         </div>
                     </div>
@@ -106,47 +137,12 @@ return (
           <p className="offer-new"> Sold and shipped by Walmart </p>
           </ul>
           
-        <div className="cart-summary">
-        <h2>Price details</h2>
-        <div className="total">
-            <span> Price: </span>
-            <span>  ₹{totalAmountCalculationFunction()} </span>
-            </div>
         
-            <div className="total">
-            <span> Discount: </span> 
-            <span> 5% </span> 
-            </div>
-
-            <div className="total">
-                <span> shipping charges: </span>
-                <span> Free </span>
-            </div>
-
-            <div className="total">
-                <span>Taxes: </span>  
-                 <span> Calculated at checkout </span>
-               </div>
-            
-            
-            <div className="checkout-section">
-            <p className="pricelist"><h2>Estimated total:</h2>
-                ₹{totalAmountCalculationFunction() - 100/5}
-            </p>
-            
-            </div>
-        <button
-            className="checkout-button"
-            disabled={cartCourses.length === 0 ||
-            totalAmountCalculationFunction() === 0}
-        >
-            Continue to checkout
-        </button>    
-    </div>
         
     
 
 </div>
+
             )}
 </div>
 

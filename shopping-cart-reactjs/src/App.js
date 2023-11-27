@@ -3,6 +3,7 @@ import './App.css';
 import SearchComponent from './components/SearchComponent';
 import ShowCourseComponent from './components/ShowCourseComponent';
 import UserCartComponent from './components/UserCartComponent';
+import TotalCartComponent from './components/TotalCartComponent';
 import cartService from './services/cartService';
 import axios from "axios";
 const date = new Date();
@@ -45,11 +46,11 @@ function App() {
   'https://i5.walmartimages.com/seo/MOPHOTO-7-Speed-27-5-Adult-Mountain-Tricycle-Exercise-Men-s-Women-s-Bicycle-3-Wheel-Cruiser-Bike_7440d07d-8fbe-47f7-9b93-97951656d3a8.b21a0a7044df3f88e31c276d24527d11.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF'
           },
           { id: 5,
-            name: 'Christmas Decor, Wall hanging',
+            name: 'Watch',
             price: 1200,
             qty:0,
             image:
-  'https://i5.walmartimages.com/asr/500c2dc3-d6cf-4f3c-ae1c-ca74fd27e94b.51c5402b5a83231f13b2772b9488de6a.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF'
+  'https://i5.walmartimages.com/seo/Apple-Watch-Series-9-GPS-Cellular-41mm-Midnight-Aluminum-Case-with-Midnight-Sport-Band-M-L_c21b6028-acd1-4040-8388-98ae5bec8027.ae88dd0027f97ad3039ec4827ef9d66f.jpeg?odnHeight=96&amp;odnWidth=96&amp;odnBg=FFFFFF 1x, https://i5.walmartimages.com/seo/Apple-Watch-Series-9-GPS-Cellular-41mm-Midnight-Aluminum-Case-with-Midnight-Sport-Band-M-L_c21b6028-acd1-4040-8388-98ae5bec8027.ae88dd0027f97ad3039ec4827ef9d66f.jpeg?odnHeight=144&amp;odnWidth=144&amp;odnBg=FFFFFF 2x'
           }
     ]);
     
@@ -163,6 +164,8 @@ function App() {
       course.name.toLowerCase().includes(searchCourse.toLowerCase())
     );
 
+    
+
   
  
     return (
@@ -172,7 +175,22 @@ function App() {
                              courseSearchUserFunction=
                                  {courseSearchUserFunction} 
                 />
-            
+
+
+                 <main className="App-main">
+                <TotalCartComponent
+                    courses={courses}
+                    cartCourses={cartCourses}
+                    totalAmountCalculationFunction={
+                      totalAmountCalculationFunction
+                  }
+                    addCourseToCartFunction={addCourseToCartFunction}
+                    deleteCourseFromCartFunction={deleteCourseFromCartFunction}
+                    setCartCourses={setCartCourses}
+                  
+                    
+                />
+            </main>
             
             <main className="App-main">
                 <UserCartComponent
@@ -206,6 +224,7 @@ function App() {
                   
                     
                 />
+                
 
 
 

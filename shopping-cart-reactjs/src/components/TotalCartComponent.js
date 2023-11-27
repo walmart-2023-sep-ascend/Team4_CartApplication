@@ -13,30 +13,32 @@ function TotalCartComponent({
 }) {
 
     return (
-    <div className="cart-summary">
+        <div className="cart-summary">
         <h2>Price details</h2>
         <div className="total">
-            <span>Price:                                                                        ₹{totalAmountCalculationFunction()}</span>
+            <span> Price: </span>
+            <span>  ₹{totalAmountCalculationFunction()} </span>
             </div>
         
             <div className="total">
-            <span>Discount:</span>   
-            <span> 5% </span>
-            </div>
-            <div className="total">
-                <span>shipping charges:</span>
-                <span>Free</span>
+            <span> Discount: </span> 
+            <span> 5% </span> 
             </div>
 
             <div className="total">
-                <span>Taxes:</span>
-               <span>Calculated at checkout</span>
+                <span> shipping charges: </span>
+                <span> Free </span>
+            </div>
+
+            <div className="total">
+                <span>Taxes: </span>  
+                 <span> Calculated at checkout </span>
                </div>
             
             
             <div className="checkout-section">
             <p className="pricelist"><h2>Estimated total:</h2>
-                ₹{totalAmountCalculationFunction() - 100/5}
+                ₹{totalAmountCalculationFunction()}
             </p>
             
             </div>
