@@ -12,7 +12,7 @@ function SearchComponent({ searchCourse, courseSearchUserFunction }) {
         alert('Redirect to Home page!');
       };
     
-      const handleLoginUser2 = () => {
+      const handleMiniCart = () => {
         //TODO: Implement place order functionality
         alert('Already you are in cart page!');
       };
@@ -56,8 +56,8 @@ function SearchComponent({ searchCourse, courseSearchUserFunction }) {
                         
 
             <button
-                      className="Login2"      
-                            onClick={() => handleLoginUser2()}
+                      className="miniCart"      
+                            onClick={() => handleMiniCart()}
                         >
             <svg
   fill="none"

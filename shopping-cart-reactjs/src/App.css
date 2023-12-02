@@ -246,7 +246,7 @@ body {
   color: rgb(15, 14, 14);
   font-size: 1.4rem;
   text-align: center;
-  margin-top: 100px;
+  
 }
 
 
@@ -408,12 +408,23 @@ body {
   margin-left: 10px;
 }
 
-.popup-message {
-  position: fixed;
+.cart-item .popup-message button {
   background-color: white;
-  padding: 20px;
-  border: 1px solid black;
-  z-index: 9999;
+  border: none;
+  color: rgb(47, 101, 208);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  font-size: 1rem;
+}
+
+.popup-message {
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  
+  
+  
 }
 
 .info-circle-inner {

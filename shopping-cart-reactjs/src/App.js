@@ -59,29 +59,42 @@ function App() {
     const [wishlist, setWishlist] = useState([]);
     const [items, setItems] = useState([]);
     //Add items to cart
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState([0]);
     const [aItem, setCartItem] = useState([])
     const [itemList, setItemList] = useState([])
-    //need to remove after product listing API integration
-    const [commonItems, setCommonItems] = useState([]);
-    const [dataArray, setDataArray] = useState([]);
+    const [userInfo, setuserInfo] = useState([])
+    const [promo, setPromo] = useState([])
 
-
-
-    const getCart =()=>{
-      cartService.getCart().then((response) => {
+    const getCart =(userId)=>{
+      cartService.getCart(userId).then((response) => {
           setCart(response.data)
           setItemList(response.data.products)
           fetchCartFunction(response.data.products)
-          
-          //console.log("--Usercart --",response.data);
       });
     };
   
-  
+    const getPromo =()=>{
+      cartService.getPromotions().then((response) => {
+        setPromo(response.data)
+        console.log("promo --->"+JSON.stringify(promo))
+
+      });
+    };
+    const getUserId =()=>{
+      cartService.getUserId().then((response) => {
+          setuserInfo(response.data)
+      });
+      console.log("userInfo ->-> "+userInfo.id)
+    };
+
     useEffect(() => {
-      getCart()
-    }, [2])
+     userInfo.id=1;
+    //  getUserId();
+      //console.log(userInfo.id)
+      if(userInfo.id !==undefined)
+         getCart(userInfo.id)
+         getPromo();
+    }, [])
 
     const addItem =(course,quantity) =>{
       cartService.addItems(course,quantity).then((response) => {
@@ -115,6 +128,7 @@ function App() {
           const alreadyCourses = cartCourses
                                 .find(item => item.product.id === course.id);
         if (alreadyCourses) {
+          console.log("***")
             const latestCartUpdate = cartCourses.map(item =>
                 item.product.id === course.id ? 
                 {
@@ -122,7 +136,10 @@ function App() {
               }
                 : item,
             );  
-            {addItem(course,alreadyCourses.quantity)} ;
+            {
+              addItem(course,alreadyCourses.quantity)
+            } ;
+            console.log("alreadyCourses-->"+JSON.stringify(alreadyCourses))
             setCartCourses(latestCartUpdate);
           
             
@@ -206,6 +223,7 @@ function App() {
                     }
                     getCart={setCart}
                     setCartCourses={setCartCourses}
+                   
                   
                 />
                 
