@@ -17,7 +17,7 @@ function TotalCartComponent({
         <h2>Price details</h2>
         <div className="total">
             <span> Price: </span>
-            <span>  ₹{totalAmountCalculationFunction()} </span>
+            <span className="totalValue"> ₹{totalAmountCalculationFunction()}</span>
             </div>
         
             <div className="total">

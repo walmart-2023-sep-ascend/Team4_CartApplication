@@ -73,13 +73,7 @@ function App() {
       });
     };
   
-    const getPromo =()=>{
-      cartService.getPromotions().then((response) => {
-        setPromo(response.data)
-        console.log("promo --->"+JSON.stringify(promo))
-
-      });
-    };
+    
     const getUserId =()=>{
       cartService.getUserId().then((response) => {
           setuserInfo(response.data)
@@ -93,7 +87,7 @@ function App() {
       //console.log(userInfo.id)
       if(userInfo.id !==undefined)
          getCart(userInfo.id)
-         getPromo();
+         //getPromo();
     }, [])
 
     const addItem =(course,quantity) =>{

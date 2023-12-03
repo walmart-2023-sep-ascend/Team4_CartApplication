@@ -13,9 +13,20 @@ function UserCartComponent({
     getCart
 }) {
 
+    const [promo, setPromo] = useState([])
+    const getPromo =()=>{
+        cartService.getPromotions().then((response) => {
+          setPromo(response.data)
+         console.log("promo --->"+JSON.stringify(response.data))
+          console.log("promo --->"+JSON.stringify(promo))
+        });
+      };
+
+
     const [deliveryDate, setDeliveryDate] = useState(null);
 
     useEffect(() => {
+        getPromo();
     const calculateDeliveryDate = () => {
       const today = new Date();
       const deliveryDate = new Date(today);
@@ -73,38 +84,14 @@ function UserCartComponent({
                                     </div>
                                     <div className="item-details">
                                         <h3>{item.product.name}</h3>
-                                        <p>Price: ₹{item.product.price} </p>
-                                        <li>
-                                    <span><img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" class="_3HLfAg"></img> 10% off on all courses</span>
-                                </li>
-                                <li>
-                                    <span><img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" class="_3HLfAg"></img> Buy 2 courses, get 1 free</span>
-                                </li>
-                                        {showOffers ? (
-                            <>
-                            
-                                <li>
-                                    <span><img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" class="_3HLfAg"></img> Buy for 100 get ₹75 off your Next Buy </span>
-                                </li>
-                                <li>
-                                    <span><img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" class="_3HLfAg"></img> Bank Offer5% Cashback on Flipkart Axis Bank Card </span>
-                                </li>
-                                <li>
-                                    <span><img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" class="_3HLfAg"></img> 20% cashback on selected courses</span>
-                                </li>
-                                
-                                <button onClick={toggleOffers}>Less</button>
-                            </>
-                        ) : (
-                            <div className="popup-message">
-                            <button onClick={toggleOffers}> View 3 more offers</button>
-                            </div>
-                        )}
-                        
-                            
-                                        <p className="offer-cart"> Actual Color: Navy </p>
-                                        <p className="offer-cart"> Size: S </p>
-                                        <p className="offer-cart"> Free Holiday returns until Jan 31 </p>
+                                        <p> Price: ₹{item.product.price} </p>
+                                          <p className="item-promo">  {promo.map((promotion) => (
+                                                        <li  key={promotion.promotionId}>
+                                                        <span><img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" class="_3HLfAg"></img> {promotion.promotionDescription}</span> 
+                                                        </li>
+                                                        ))}
+                                       </p>
+                                        <p className="offer-cart"> Free 7 days returns </p>
                                     </div>
                                 </div>
                                 <div>

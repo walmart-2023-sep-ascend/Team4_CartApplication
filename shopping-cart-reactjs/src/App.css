@@ -191,6 +191,18 @@ body {
 .cart-item .item-details {
   flex: 1;
   display: inline;
+ 
+}
+
+.cart-item .item-promo {
+  flex: 1;
+  display: inline;
+ 
+}
+.item-promo {
+  flex: 1;
+  display: inline;
+  color:#22c3bb;
 }
 
 .cart-item h3 {
@@ -201,9 +213,11 @@ body {
 }
 
 .cart-item p {
+  /*
   font-size: 1.1rem;
   color: #777;
   margin: 1px 0;
+  */
 }
 
 .cart-item .item-actions {
@@ -227,10 +241,11 @@ body {
 
 
 .offer-cart{
-  color: rgb(40, 37, 37);
-  font-size: 1.4rem;
-  margin: 10px 15;
+  font-size: 0.9rem;
+  margin: 10px 0;
   margin-left: 0px;
+  color: #1E90FF;
+  font-style: italic;
 }
 
 .offer-cart1  {
@@ -267,6 +282,18 @@ body {
   font-size: 1.3rem;
   margin: 10px 10;
   text-align: left;
+  margin-top: 0px;
+  margin-right: 10px;
+  margin-bottom: 40px;
+  padding: 0px 5px; 
+  color: #323754;
+  justify-content: space-between;
+  width: 100%;
+}
+.cart-summary.totalValue {
+  font-size: 1.3rem;
+  margin: 10px 10;
+  text-align: right;
   margin-top: 0px;
   margin-right: 10px;
   margin-bottom: 40px;
@@ -355,7 +382,7 @@ body {
 
 .item-details .offer-cart p {
   margin-top: 1%;
-  color: rgb(40, 37, 37);
+  color:#22c3bb
 }
 
 .item-actions .quantity p {
