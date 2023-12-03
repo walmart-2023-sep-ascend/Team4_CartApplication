@@ -62,7 +62,7 @@ function App() {
     const [cart, setCart] = useState([0]);
     const [aItem, setCartItem] = useState([])
     const [itemList, setItemList] = useState([])
-    const [userInfo, setuserInfo] = useState([])
+    const [userInfo, setUserInfo] = useState([])
     const [promo, setPromo] = useState([])
 
     const getCart =(userId)=>{
@@ -72,26 +72,43 @@ function App() {
           fetchCartFunction(response.data.products)
       });
     };
-  
     
     const getUserId =()=>{
       cartService.getUserId().then((response) => {
-          setuserInfo(response.data)
+          setUserInfo(response.data)
+          //userInfo=response.data.userId;
+        //  const cookies = document.cookie
+          console.log("user Response ->"+JSON.stringify(response.data))
+        //  console.log("userInfo = "+response.data.userId)
+          
       });
-      console.log("userInfo ->-> "+userInfo.id)
+      
+     // getUserProfile();
     };
 
+  /*  const getUserProfile=()=>{
+      cartService.getUserProfile().then((response) => {
+        setUserInfo(response.data)
+        //const cookies = document.cookie
+        console.log("user Response ->"+JSON.stringify(response.data))
+       // console.log("cookie :"+cookies)
+        
+    });
+    console.log("userInfo ->-> "+userInfo.id)
+    }; */
+
     useEffect(() => {
-     userInfo.id=1;
-    //  getUserId();
-      //console.log(userInfo.id)
-      if(userInfo.id !==undefined)
-         getCart(userInfo.id)
-         //getPromo();
+   //  userInfo.id=1;
+      getUserId();
+      console.log("user id -"+userInfo.userId)
+      if(userInfo.userId !==undefined)
+         getCart(userInfo.userId)
     }, [])
 
     const addItem =(course,quantity) =>{
-      cartService.addItems(course,quantity).then((response) => {
+      const cartPrice=totalAmountCalculationFunction();
+      console.log("cartPrice"+cartPrice )
+      cartService.addItems(course,quantity,userInfo.userId,cartPrice).then((response) => {
           setCartItem(response.data)
           console.log(response.data);
           console.log("Response :",quantity);
@@ -142,6 +159,7 @@ function App() {
         }
     };
 
+
     const saveForLaterFunction = (product) => {
         const updatedCart = wishlist
                              .filter(item => item.product.id !== product.id);
@@ -155,12 +173,24 @@ function App() {
       };
 
 
-    const deleteCourseFromCartFunction = (Course) => {
+      const deleteCourseFromCartFunction = (Course) => {
+      
       const updatedCart = cartCourses
                           .filter(item => item.product.id !== Course.id);
+
+      const removeItemfromCart = cartCourses
+                          .filter(item => item.product.id == Course.id); 
+      const productId = removeItemfromCart.map(item => item.product.id)[0];                                 
       setCartCourses(updatedCart);
+
+      cartService.removeItem(userInfo.userId,cart.cartId,productId).then((response) => {
+       
+        console.log("after remove item"+JSON.stringify(response.data));
+       
+    });
+
   };
- 
+
     const totalAmountCalculationFunction = () => {
         return cartCourses
                .reduce((total, item) =>
