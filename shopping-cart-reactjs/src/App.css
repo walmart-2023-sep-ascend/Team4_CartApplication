@@ -122,10 +122,10 @@ body {
   flex: 10;
   display: block;
   width: 30%;
-  margin-left: 35%;
+  margin-left: 15%;
   min-width: 10px;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: -25%;
+  margin-bottom: 15%;
   background-color: white;
   border: 5px solid #d3d3dd;
   border-radius: 10px;
@@ -191,18 +191,6 @@ body {
 .cart-item .item-details {
   flex: 1;
   display: inline;
- 
-}
-
-.cart-item .item-promo {
-  flex: 1;
-  display: inline;
- 
-}
-.item-promo {
-  flex: 1;
-  display: inline;
-  color:#22c3bb;
 }
 
 .cart-item h3 {
@@ -213,11 +201,9 @@ body {
 }
 
 .cart-item p {
-  /*
   font-size: 1.1rem;
   color: #777;
   margin: 1px 0;
-  */
 }
 
 .cart-item .item-actions {
@@ -241,11 +227,10 @@ body {
 
 
 .offer-cart{
-  font-size: 0.9rem;
-  margin: 10px 0;
+  color: rgb(40, 37, 37);
+  font-size: 1.4rem;
+  margin: 10px 15;
   margin-left: 0px;
-  color: #1E90FF;
-  font-style: italic;
 }
 
 .offer-cart1  {
@@ -290,11 +275,25 @@ body {
   justify-content: space-between;
   width: 100%;
 }
-.cart-summary.totalValue {
+
+.total1 {
   font-size: 1.3rem;
   margin: 10px 10;
   text-align: right;
-  margin-top: 0px;
+  margin-top: -66px;
+  margin-right: 10px;
+  margin-bottom: 40px;
+  padding: 0px 5px; 
+  color: #323754;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.total2 {
+  font-size: 1.3rem;
+  margin: 10px 10;
+  text-align: right;
+  margin-top: -66px;
   margin-right: 10px;
   margin-bottom: 40px;
   padding: 0px 5px; 
@@ -304,6 +303,18 @@ body {
 }
 
 
+.total3 {
+  font-size: 1.3rem;
+  margin: 10px 10;
+  text-align: right;
+  margin-top: -76px;
+  margin-right: 10px;
+  margin-bottom: 40px;
+  padding: 0px 5px; 
+  color: #323754;
+  justify-content: space-between;
+  width: 100%;
+}
 
 .pricelist {
   text-align: center;
@@ -328,6 +339,13 @@ body {
 .checkout-button:hover {
   background-color: #1da71d;
 }
+
+
+.cart.empty-cart {
+  margin-left: 5%;
+  margin-top: -33%;
+}
+
 
 
 .no-results,
@@ -385,8 +403,25 @@ body {
   color:#22c3bb
 }
 
+.cart-item .item-details {
+  flex: 1;
+  display: inline;
+ 
+}
+
 .item-actions .quantity p {
   margin: 5% 5%;
+}
+
+.cart-item .item-promo {
+  flex: 1;
+  display: inline;
+ 
+}
+.item-promo {
+  flex: 1;
+  display: inline;
+  color:#22c3bb;
 }
 
 .checkout-section {
