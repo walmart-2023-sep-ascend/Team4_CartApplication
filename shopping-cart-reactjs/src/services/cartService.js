@@ -59,7 +59,6 @@ class CartService{
             }
           });  
     }
-
     getPromotions()
     {
         console.log("PROMO_SERVICE_URL->"+PROMO_SERVICE_URL)

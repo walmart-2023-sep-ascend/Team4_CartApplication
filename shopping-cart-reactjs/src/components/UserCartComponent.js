@@ -120,7 +120,7 @@ function UserCartComponent({
                                                                 : prevItem
                                                         );
                                                         
-                                                        addCourseToCartFunction(item)
+                                                       // addCourseToCartFunction(item)
                                                         console.log("item"+JSON.stringify(item))
                                                         return updatedCart;
                                                     });

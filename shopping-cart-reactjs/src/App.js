@@ -134,7 +134,6 @@ function App() {
       setCartCourses(buildUserCartArr)
   };
 
-  
     const addCourseToCartFunction = (course) => {
           const alreadyCourses = cartCourses
                                 .find(item => item.product.id === course.id);
