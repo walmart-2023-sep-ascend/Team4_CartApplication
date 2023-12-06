@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as a parent image
-FROM FROM node:20.10.0 as build
+FROM FROM node:latest as build
 
 # Set the working directory to /app
 WORKDIR /app
