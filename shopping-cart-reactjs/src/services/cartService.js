@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const CART_SERVICE_URL="http://localhost:8080/cart/fetchCartDetails/user/";
-const ADD_SERVICE_URL="http://localhost:8080/cart/addToCart";
-const LOGIN_SERVICE_URL="http://localhost:8181/api/auth/signin"  //team 1 login service URL
-const USER_PROFILE_URL="http://localhost:8181/api/test/profile"
-const PROMO_SERVICE_URL="http://localhost:8080/promotions/active"
-const REMOVE_ITEM_URL="http://localhost:8080/cart/remove"
-const MOVE_TO_WISHLIST_URL="http://localhost:8080/cart/moveFromCartToWish"
-const CART_URL="http://localhost:3000/"
+const CART_SERVICE_URL="http://20.127.159.231:9300/cart/fetchCartDetails/user/";
+const ADD_SERVICE_URL="http://20.127.159.231:9300/cart/addToCart";
+const LOGIN_SERVICE_URL="http://192.168.29.215:8181/api/auth/signin"  //team 1 login service URL
+const USER_PROFILE_URL="http://192.168.29.215:8181/api/test/profile"
+const PROMO_SERVICE_URL="http://20.127.159.231:9300/promotions/active"
+const REMOVE_ITEM_URL="http://20.127.159.231:9300/cart/remove"
+const MOVE_TO_WISHLIST_URL="http://20.127.159.231:9300/cart/moveFromCartToWish"
+const CART_URL="http://20.127.159.231:9300/cart/"
 
 const date = new Date();
 class CartService{
@@ -23,6 +23,10 @@ class CartService{
         return axios.get(USER_PROFILE_URL, {withCredentials: true}) ; 
     }
 
+    movetoWishList(){
+        return axios.get(USER_PROFILE_URL, {withCredentials: true}) ; 
+    }
+
     getUserId(){
         try{
         return axios({
@@ -32,7 +36,7 @@ class CartService{
                 'Content-Type': 'application/json'
             }, 
             data: {
-                email:"arun.perumal5@gmail.com",
+                email:"team4cart@gmail.com",
                 password :123456,
                 withCredentials: true,
             },

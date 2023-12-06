@@ -133,7 +133,6 @@ function App() {
       const buildUserCartArr = updatedCommonItems.map(item => ({ product: { ...item },quantity:item.qty }));
       setCartCourses(buildUserCartArr)
   };
-
     const addCourseToCartFunction = (course) => {
           const alreadyCourses = cartCourses
                                 .find(item => item.product.id === course.id);
