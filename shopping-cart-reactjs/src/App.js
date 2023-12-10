@@ -6,6 +6,8 @@ import UserCartComponent from './components/UserCartComponent';
 import TotalCartComponent from './components/TotalCartComponent';
 import cartService from './services/cartService';
 import axios from "axios";
+import Cookies from 'js-cookie';
+
 const date = new Date();
 
 
@@ -64,46 +66,60 @@ function App() {
     const [itemList, setItemList] = useState([])
     const [userInfo, setUserInfo] = useState([])
     const [promo, setPromo] = useState([])
+    const [authToken, setAuthToken] = useState(null);
+   
+    
+
+    const getUserId =()=>{
+
+      console.log("STEP 1 : getUserId")
+      cartService.getUserId().then((response) => {
+        // const setCookieHeader = response.Cookies;
+        const sessionuserid = response.data.userId;
+        const token = response.data.token;
+          setUserInfo(response.data)
+          
+         
+          Cookies.set('token', response.data.token, {
+            expires: 1, // Expires in 1 day
+            secure: true, // Cookie is only sent over HTTPS
+            sameSite: 'None', // Allows cross-site access
+            
+          });
+          
+         const userToken= Cookies.get('token')
+         console.log("userToken   "+userToken)
+          if(response.data.token !==undefined ){
+            //cartService.getUserProfile(userToken).then((response) => {
+             //console.log("USER PROFILE RESPONE   "+response.data);
+           // });
+          }
+
+          console.log('sessionuserid:', sessionuserid);
+         if(sessionuserid !==undefined){
+          getCart(sessionuserid)
+       } 
+      });
+    };
+
 
     const getCart =(userId)=>{
+      console.log("STEP 2 : getCart")
       cartService.getCart(userId).then((response) => {
           setCart(response.data)
           setItemList(response.data.products)
           fetchCartFunction(response.data.products)
       });
     };
-    
-    const getUserId =()=>{
-      cartService.getUserId().then((response) => {
-          setUserInfo(response.data)
-          //userInfo=response.data.userId;
-        //  const cookies = document.cookie
-          console.log("user Response ->"+JSON.stringify(response.data))
-        //  console.log("userInfo = "+response.data.userId)
-          
-      });
-      
-     // getUserProfile();
-    };
-
-  /*  const getUserProfile=()=>{
-      cartService.getUserProfile().then((response) => {
-        setUserInfo(response.data)
-        //const cookies = document.cookie
-        console.log("user Response ->"+JSON.stringify(response.data))
-       // console.log("cookie :"+cookies)
-        
-    });
-    console.log("userInfo ->-> "+userInfo.id)
-    }; */
 
     useEffect(() => {
-   //  userInfo.id=1;
-      getUserId();
-      console.log("user id -"+userInfo.userId)
-      if(userInfo.userId !==undefined)
-         getCart(userInfo.userId)
+      console.log("STEP 0 : useEffect")
+    //  addCourseToCartFunction();
+     getUserId();
+    
+     
     }, [])
+    
 
     const addItem =(course,quantity) =>{
       const cartPrice=totalAmountCalculationFunction();
@@ -134,10 +150,11 @@ function App() {
       setCartCourses(buildUserCartArr)
   };
     const addCourseToCartFunction = (course) => {
+      alert('calling')
           const alreadyCourses = cartCourses
                                 .find(item => item.product.id === course.id);
         if (alreadyCourses) {
-          console.log("***")
+          console.log("item alreay present in cart ")
             const latestCartUpdate = cartCourses.map(item =>
                 item.product.id === course.id ? 
                 {
@@ -146,14 +163,16 @@ function App() {
                 : item,
             );  
             {
-              addItem(course,alreadyCourses.quantity)
+              addItem(course,alreadyCourses.quantity+1)
             } ;
             console.log("alreadyCourses-->"+JSON.stringify(alreadyCourses))
             setCartCourses(latestCartUpdate);
           
             
         } else {
+           console.log("new item added to cart ")
             setCartCourses([...cartCourses, {product: course, quantity: 1}]);
+            addItem(course,1)
         }
     };
 
@@ -217,6 +236,8 @@ function App() {
 
 
                  <main className="App-main">
+                
+
                 <TotalCartComponent
                     courses={courses}
                     cartCourses={cartCourses}
@@ -235,10 +256,11 @@ function App() {
                 <UserCartComponent
                     
                     cartCourses={cartCourses}
+                    addCourseToCartFunction={addCourseToCartFunction}
                     deleteCourseFromCartFunction={deleteCourseFromCartFunction}
                     saveForLaterFunction={saveForLaterFunction}
                     //SaveToCartFunction={SaveToCartFunction}
-                    addCourseToCartFunction={addCourseToCartFunction}
+                    
                     removeFromCartFunction={removeFromCartFunction}
                     totalAmountCalculationFunction={
                         totalAmountCalculationFunction
@@ -249,21 +271,21 @@ function App() {
                   
                 />
                 
-                
-                  
-                
-                
-                </main>
-            
                 <ShowCourseComponent
                     courses={courses}
-                    filterCourseFunction={filterCourseFunction}
                     addCourseToCartFunction={addCourseToCartFunction}
+                    filterCourseFunction={filterCourseFunction}
                     deleteCourseFromCartFunction={deleteCourseFromCartFunction}
                     setCartCourses={setCartCourses}
                   
                     
                 />
+                  
+                
+                
+                </main>
+            
+               
                 
 
 

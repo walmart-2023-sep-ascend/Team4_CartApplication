@@ -1,30 +1,45 @@
 import axios from "axios";
 
+
 const CART_SERVICE_URL="http://20.127.159.231:9300/cart/fetchCartDetails/user/";
 const ADD_SERVICE_URL="http://20.127.159.231:9300/cart/addToCart";
-const LOGIN_SERVICE_URL="http://192.168.29.215:8181/api/auth/signin"  //team 1 login service URL
-const USER_PROFILE_URL="http://192.168.29.215:8181/api/test/profile"
+const LOGIN_SERVICE_URL="http://52.142.30.237:9003/api/auth/signin"  //team 1 login service URL
+const USER_PROFILE_URL="http://52.142.30.237:9003/api/test/profile"
 const PROMO_SERVICE_URL="http://20.127.159.231:9300/promotions/active"
 const REMOVE_ITEM_URL="http://20.127.159.231:9300/cart/remove"
 const MOVE_TO_WISHLIST_URL="http://20.127.159.231:9300/cart/moveFromCartToWish"
 const CART_URL="http://20.127.159.231:9300/cart/"
+const authKey="Token="
 
 const date = new Date();
+
 class CartService{
-    getCart = (userId) =>{
+ 
+
+    getCart = async(userId) =>{
         console.log("fetchUserCart userId ->"+userId)
         const fetchUserCart =CART_SERVICE_URL+userId;
         console.log("fetchUserCart ->"+fetchUserCart)
         return axios.get(fetchUserCart);
     }
 
-    getUserProfile(){
-       // headers.set("Cookie", cookies.sessionCookie);
-        return axios.get(USER_PROFILE_URL, {withCredentials: true}) ; 
+    getUserProfile(token){
+        console.log("Inside getUserProfile")
+      const authToken=authKey+token;
+      console.log("authToken   :"+authToken)
+        return axios({
+            method: 'get',
+            withCredentials: true,
+            url: USER_PROFILE_URL,
+            headers: {
+                
+                'Cookie' : authToken,
+            }
+          });
     }
 
     movetoWishList(){
-        return axios.get(USER_PROFILE_URL, {withCredentials: true}) ; 
+        return axios.get(MOVE_TO_WISHLIST_URL, {withCredentials: true}) ; 
     }
 
     getUserId(){
@@ -41,6 +56,7 @@ class CartService{
                 withCredentials: true,
             },
           });
+          
         }catch(error){
             console.error('Error:', error);
             throw error;
@@ -92,10 +108,6 @@ class CartService{
           });
 
           console.log("inside cartservice")
-    }
+    }  
 }
-
-
-
-
 export default new CartService();
