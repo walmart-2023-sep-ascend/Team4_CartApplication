@@ -34,6 +34,7 @@ class CartService{
             headers: {
                 
                 'Cookie' : authToken,
+                
             }
           });
     }
@@ -43,6 +44,7 @@ class CartService{
     }
 
     getUserId(){
+        //debugger;
         try{
         return axios({
             method: 'post',
@@ -65,6 +67,7 @@ class CartService{
 
 
     removeItem(uId,cId,pId){
+        //debugger;
         console.log(uId)
         console.log(pId)
         console.log(cId)
@@ -79,6 +82,25 @@ class CartService{
             }
           });  
     }
+
+    saveForLater(cId,pId,uId,eId){
+        //debugger;
+        console.log(uId)
+        console.log(pId)
+        console.log(cId)
+        return axios({
+            method: 'post',
+            url: MOVE_TO_WISHLIST_URL,
+            headers: {'Content-Type': 'application/json'}, 
+            data: {
+             userId:uId,
+             prodId:pId,
+             cartID:cId,
+             email:eId
+            }
+          });  
+    }
+
     getPromotions()
     {
         console.log("PROMO_SERVICE_URL->"+PROMO_SERVICE_URL)
