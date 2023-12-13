@@ -5,6 +5,8 @@ function UserCartComponent({
     cartCourses,
     deleteCourseFromCartFunction,
     saveForLaterFunction,
+    increaseQtyFunction,
+    decreaseQtyFunction,
     setCartCourses,
 }) {
 
@@ -132,37 +134,13 @@ function UserCartComponent({
                                         <div className="quantity">
                                             <button
                                                 style={{ margin: '1%' }}
-                                                onClick={(e) => {
-                                                
-                                                    setCartCourses((prevCartCourses) => {
-                                                        const updatedCart = prevCartCourses.map((prevItem) =>
-                                                            prevItem.product.id === item.product.id
-                                                                ? { ...prevItem, quantity: item.quantity + 1 }
-                                                                : prevItem
-                                                        );
-                                                        
-                                                       // addCourseToCartFunction(item)
-                                                        return updatedCart;
-                                                    });
-                                                    }}
+                                                onClick={() => increaseQtyFunction(item.product)}
                                             >
                                                 +
                                             </button>
                                             <p className="quant">{item.quantity} </p>
                                             <button
-                                                onClick={(e) => {
-                                                    setCartCourses((prevCartCourses) => {
-                                                        const updatedCart = prevCartCourses.map((prevItem) =>
-                                                            prevItem.product.id === item.product.id
-                                                                ? {
-                                                                      ...prevItem,
-                                                                      quantity: Math.max(item.quantity - 1, 0),
-                                                                  }
-                                                                : prevItem
-                                                        );
-                                                        return updatedCart;
-                                                    });
-                                                }}
+                                            onClick={() => decreaseQtyFunction(item.product)}
                                             >
                                                 -
                                             </button>
