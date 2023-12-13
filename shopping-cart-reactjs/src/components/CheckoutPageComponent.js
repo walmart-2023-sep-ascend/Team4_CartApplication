@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import SearchComponent from './SearchComponent';
 
-function EmptyPageComponent({ searchCourse, courseSearchUserFunction }) {
+function CheckoutPageComponent({ searchCourse, courseSearchUserFunction }) {
     useEffect(() => {
       window.location.reload();
     }, []);
@@ -23,4 +23,4 @@ function EmptyPageComponent({ searchCourse, courseSearchUserFunction }) {
       
 
       
-export default EmptyPageComponent;
+export default CheckoutPageComponent;

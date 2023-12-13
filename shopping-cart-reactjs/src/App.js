@@ -4,26 +4,35 @@ import SearchComponent from './components/SearchComponent';
 import ShowCourseComponent from './components/ShowCourseComponent';
 import UserCartComponent from './components/UserCartComponent';
 import TotalCartComponent from './components/TotalCartComponent';
-//import EmptyPageComponent from './components/EmptyPageComponent';
 import cartService from './services/cartService';
-//import { useLocation } from 'react-router-dom'; 
+import { useLocation } from 'react-router-dom'; 
 
 const date = new Date();
 
-//import TotalCartComponent from './components/TotalCartComponent';
 
 
 
  
 function App() {
+let userId=38;  //default value
+let userEmail='test@gmail.com' //default value 
 
- // const location = useLocation();
- // const queryParams = new URLSearchParams(location.search);
- // const userId = queryParams.get('id');
- // const userEmail = queryParams.get('email');
+ const location = useLocation();
+ const queryParams = new URLSearchParams(location.search);
 
-   const userId = 55;
-    const userEmail = 'adam@gmail.com';
+ const isEmptyMethod1 = queryParams.has('id');
+
+ console.log("isEmptyMethod1"+isEmptyMethod1)
+
+ if(isEmptyMethod1){
+   userId = queryParams.get('id');
+   userEmail = queryParams.get('email');
+ }
+
+     
+
+   //const userId = 55;
+   // const userEmail = 'adam@gmail.com';
   var itemQty;
   const ADD_SERVICE_URL="http://localhost:8080/cart/addToCart";
 

@@ -5,7 +5,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import EmptyPageComponent from './components/EmptyPageComponent';
+import CheckoutPageComponent from './components/CheckoutPageComponent';
 
 
 
@@ -14,7 +14,7 @@ ReactDOM.render(
     <Router>
       <Routes>
       <Route path="/" element={<App />} />
-        <Route path="/empty-page" element={< EmptyPageComponent />} />
+        <Route path="/empty-page" element={< CheckoutPageComponent />} />
       </Routes>
     </Router>
   </React.StrictMode>,
