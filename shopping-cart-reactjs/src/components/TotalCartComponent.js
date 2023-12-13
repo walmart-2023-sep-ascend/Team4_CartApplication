@@ -1,6 +1,6 @@
-//components/TotalCartComponent.js
- 
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 function TotalCartComponent({
     cartCourses,
@@ -11,57 +11,93 @@ function TotalCartComponent({
     removeFromCartFunction,
     setCartCourses,
 }) {
+    const [discountApplied, setDiscountApplied] = useState(false);
+    const [promotionApplied, setPromotionApplied] = useState(false);
+    
+
+    
+
+    const applyDiscount = () => {
+        // Set the discount applied flag to true
+        setDiscountApplied(true);
+        setPromotionApplied(true);
+    };
+
+    const removeDiscount = () => {
+        // Set the discount applied flag to false
+        setDiscountApplied(false);
+        setPromotionApplied(false);
+    };
+
+    const calculateTotalAmount = () => {
+        // Calculate the total amount after applying the discount
+        const total = totalAmountCalculationFunction() - (discountApplied ? totalAmountCalculationFunction() * 0.1 : 0);
+        return total;
+    };
 
     return (
         <div className="cart-summary">
-        <h2>Price details</h2>
-        <div className="total">
-            <span> Price: </span>
-            </div>
-            <div className="total1">
-            <span>  ₹{totalAmountCalculationFunction()} </span>
-            </div>
-        
+            
+
+            <h2>Price details</h2>
             <div className="total">
-            <span> Discount: </span> 
+                <span> Price: </span>
             </div>
             <div className="total1">
-            <span> 5% </span> 
+                <span> ₹{totalAmountCalculationFunction()} </span>
             </div>
 
             <div className="total">
-                <span> shipping charges: </span>
-                </div>
-                <div className="total1">
+                <span>Eligible for 10% discount</span>
+            </div>
+            <div className="total1">
+                {discountApplied ? (
+                    <>
+                        {promotionApplied && (
+                            <div className="promotion-applied">
+                                Congratulations !! Promotion Applied
+                            </div>
+                        )}
+                        <button onClick={removeDiscount}>Remove</button>
+                    </>
+                ) : (
+                    <button onClick={applyDiscount}>Apply</button>
+                )}
+            </div>
+
+            <div className="total">
+                <span> Shipping charges: </span>
+            </div>
+            <div className="total1">
                 <span> Free </span>
             </div>
 
             <div className="total">
-                <span>Taxes: </span>  
-                </div>
-                <div className="total2">
-                 <span> Calculated at checkout </span>
-               </div>
-            
-            
+                <span> Taxes: </span>
+            </div>
+            <div className="total2">
+                <span> Calculated at checkout </span>
+            </div>
+
             <div className="total">
-            <span> <h3>Estimated total:</h3> </span>
+                <span>
+                    <h3>Estimated total:</h3>
+                </span>
             </div>
             <div className="total3">
-            <span>   ₹{totalAmountCalculationFunction() } </span>
+                <span> ₹{Math.round(calculateTotalAmount())} </span>
             </div>
 
-
-        <button
+            <button
             className="checkout-button"
             disabled={cartCourses.length === 0 ||
             totalAmountCalculationFunction() === 0}
-        >
-            Continue to checkout
-        </button>    
-    </div>
-    )
-    
+ 
+>
+  Continue to checkout
+</button>
+        </div>
+    );
 }
 
- export default TotalCartComponent;
+export default TotalCartComponent;

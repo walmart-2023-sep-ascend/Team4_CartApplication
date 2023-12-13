@@ -5,11 +5,11 @@ function UserCartComponent({
     cartCourses,
     deleteCourseFromCartFunction,
     totalAmountCalculationFunction,
+    totalAmountdiscountFunction,
     SaveToCartFunction,
     saveForLaterFunction,
     removeFromCartFunction,
     setCartCourses,
-    addCourseToCartFunction,
     getCart
 }) {
 
@@ -24,6 +24,11 @@ function UserCartComponent({
 
 
     const [deliveryDate, setDeliveryDate] = useState(null);
+    const [selectedProduct, setSelectedProduct] = useState({});
+    const [buttonClicked, setButtonClicked] = useState(false);
+    const [appliedDiscounts, setAppliedDiscounts] = useState({});
+
+    
 
     useEffect(() => {
         getPromo();
@@ -49,6 +54,21 @@ function UserCartComponent({
     const toggleOffers = () => {
         setShowOffers(!showOffers);
     };
+
+
+    const handleButtonClick = (item) => {
+        setButtonClicked(true);
+        setSelectedProduct(item.product);
+    
+         // Calculate the discounted price
+         const discountedPrice = item.product.price * (1 - item.product.discount/100 );
+
+         // Update the appliedDiscounts state
+         setAppliedDiscounts((prevDiscounts) => ({
+             ...prevDiscounts,
+             [item.product.id]: discountedPrice,
+         }));
+     };
 
     return (
         <div className={`cart ${cartCourses.length > 0 ? 'active' : ''}`}>
@@ -84,13 +104,21 @@ function UserCartComponent({
                                     </div>
                                     <div className="item-details">
                                         <h3>{item.product.name}</h3>
-                                        <p> Price: ₹{item.product.price} </p>
-                                          <p className="item-promo">  {promo.map((promotion) => (
-                                                        <li  key={promotion.promotionId}>
-                                                        <span><img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" class="_3HLfAg"></img> {promotion.promotionDescription}</span> 
-                                                        </li>
-                                                        ))}
-                                       </p>
+                                        
+
+                                        <p> Price: <del>₹{item.product.price} </del> ₹{Math.round(item.product.price * (1 - item.product.discount/100 ))} </p>
+
+
+                                        
+                                        <p> {item.product.offers} </p>
+                                        
+                                        
+
+                                        
+                                          
+                                                        
+                                        
+                                       
                                         <p className="offer-cart"> Free 7 days returns </p>
                                     </div>
                                 </div>
@@ -121,7 +149,6 @@ function UserCartComponent({
                                                         );
                                                         
                                                        // addCourseToCartFunction(item)
-                                                        console.log("item"+JSON.stringify(item))
                                                         return updatedCart;
                                                     });
                                                     }}

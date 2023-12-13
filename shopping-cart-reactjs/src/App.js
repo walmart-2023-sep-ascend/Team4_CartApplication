@@ -6,7 +6,7 @@ import UserCartComponent from './components/UserCartComponent';
 import TotalCartComponent from './components/TotalCartComponent';
 //import EmptyPageComponent from './components/EmptyPageComponent';
 import cartService from './services/cartService';
-import { useLocation } from 'react-router-dom'; 
+//import { useLocation } from 'react-router-dom'; 
 
 const date = new Date();
 
@@ -18,11 +18,13 @@ const date = new Date();
  
 function App() {
 
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const userId = queryParams.get('id');
-  const userEmail = queryParams.get('email');
+ // const location = useLocation();
+ // const queryParams = new URLSearchParams(location.search);
+ // const userId = queryParams.get('id');
+ // const userEmail = queryParams.get('email');
 
+   const userId = 55;
+    const userEmail = 'adam@gmail.com';
   var itemQty;
   const ADD_SERVICE_URL="http://localhost:8080/cart/addToCart";
 
@@ -133,11 +135,10 @@ function App() {
 
     const addItem =(course,quantity) =>{
       const cartPrice=totalAmountCalculationFunction();
-      console.log("cartPrice"+cartPrice )
-      cartService.addItems(course,quantity,userInfo.userId,cartPrice).then((response) => {
+     
+      cartService.addItems(course,quantity,userId,cartPrice).then((response) => {
           setCartItem(response.data)
-          console.log(response.data);
-          console.log("Response :",quantity);
+
       });
     };
     
@@ -163,7 +164,7 @@ function App() {
           const alreadyCourses = cartCourses
                                 .find(item => item.product.id === course.id);
         if (alreadyCourses) {
-          console.log("***")
+          
             const latestCartUpdate = cartCourses.map(item =>
                 item.product.id === course.id ? 
                 {
@@ -174,7 +175,7 @@ function App() {
             {
               addItem(course,alreadyCourses.quantity)
             } ;
-            console.log("alreadyCourses-->"+JSON.stringify(alreadyCourses))
+            //console.log("alreadyCourses-->"+JSON.stringify(alreadyCourses))
             setCartCourses(latestCartUpdate);
           
             
@@ -184,10 +185,19 @@ function App() {
     };
 
 
-    const saveForLaterFunction = (product) => {
-        const updatedCart = wishlist
-                             .filter(item => item.product.id !== product.id);
+    const saveForLaterFunction = (Course) => {
+
+        const updatedCart = cartCourses.filter(item => item.product.id !== Course.id);
+        const removeItemfromCart = cartCourses.filter(item => item.product.id == Course.id); 
+        const productId = removeItemfromCart.map(item => item.product.id)[0];  
+
         setWishlist(updatedCart);
+        console.log("productId"+productId)
+        cartService.movetoWishList(userId,userEmail,productId).then((response) => {
+        console.log("after moveing  item to wishlist "+JSON.stringify(response.data));
+         
+      });
+
       };
 
       const removeFromCartFunction = (product) => {
@@ -207,7 +217,7 @@ function App() {
       const productId = removeItemfromCart.map(item => item.product.id)[0];                                 
       setCartCourses(updatedCart);
 
-      cartService.removeItem(userInfo.userId,cart.cartId,productId).then((response) => {
+      cartService.removeItem(userId,cart.cartId,productId).then((response) => {
        
         console.log("after remove item"+JSON.stringify(response.data));
        

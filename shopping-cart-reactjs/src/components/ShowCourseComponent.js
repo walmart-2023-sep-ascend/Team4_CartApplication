@@ -18,8 +18,8 @@ function ShowCourseComponent({ courses,
 
 
     return (
-        <header className="App-header1">
-            <h2> Recommended with your order</h2>
+        <header className="App-more">
+            <h2> More item to explore</h2>
         <div className="product-list">
      
             {filterCourseFunction.length === 0 ? (

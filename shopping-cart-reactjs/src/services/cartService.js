@@ -39,8 +39,25 @@ class CartService{
           });
     }
 
-    movetoWishList(){
-        return axios.get(MOVE_TO_WISHLIST_URL, {withCredentials: true}) ; 
+    movetoWishList(uId,uEmail,pId){
+        try{
+            return axios({
+                method: 'post',
+                url: MOVE_TO_WISHLIST_URL,
+                headers: {
+                    'Content-Type': 'application/json'
+                }, 
+                data: {
+                    email:uEmail,
+                    userId :uId,
+                    prodId: pId,
+                },
+              });
+              
+            }catch(error){
+                console.error('Error:', error);
+                //throw error;
+            }
     }
 
     getUserId(){
