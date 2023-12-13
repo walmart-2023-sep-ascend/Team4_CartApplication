@@ -143,7 +143,7 @@ let userEmail='test@gmail.com' //default value
 
     const addItem =(course,quantity) =>{
       const cartPrice=totalAmountCalculationFunction();
-     
+     console.log("add item to cart "+course+quantity+userId+cartPrice)
       cartService.addItems(course,quantity,userId,cartPrice).then((response) => {
           setCartItem(response.data)
 
@@ -189,6 +189,7 @@ let userEmail='test@gmail.com' //default value
             
         } else {
             setCartCourses([...cartCourses, {product: course, quantity: 1}]);
+            addItem(course,1)
         }
     };
 
@@ -285,7 +286,6 @@ let userEmail='test@gmail.com' //default value
                     cartCourses={cartCourses}
                     deleteCourseFromCartFunction={deleteCourseFromCartFunction}
                     saveForLaterFunction={saveForLaterFunction}
-                    //SaveToCartFunction={SaveToCartFunction}
                     addCourseToCartFunction={addCourseToCartFunction}
                     removeFromCartFunction={removeFromCartFunction}
                     totalAmountCalculationFunction={
