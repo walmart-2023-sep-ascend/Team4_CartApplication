@@ -9,6 +9,7 @@ const PROMO_SERVICE_URL="http://20.127.159.231:9300/promotions/active"
 const REMOVE_ITEM_URL="http://20.127.159.231:9300/cart/remove"
 const MOVE_TO_WISHLIST_URL="http://20.127.159.231:9300/cart/moveFromCartToWish"
 const CART_URL="http://20.127.159.231:9300/cart/"
+const PRODUCT_SERVICE="http://20.127.159.231:9300//item/fetchItemId/"
 const authKey="Token="
 
 const date = new Date();
@@ -21,6 +22,12 @@ class CartService{
         const fetchUserCart =CART_SERVICE_URL+userId;
         console.log("fetchUserCart ->"+fetchUserCart)
         return axios.get(fetchUserCart);
+    }
+
+    getItem = async(pId) =>{
+        console.log("product id->"+pId)
+        const fetchItem =CART_SERVICE_URL+pId;
+        return axios.get(fetchItem);
     }
 
     getUserProfile(token){
@@ -59,9 +66,8 @@ class CartService{
                 //throw error;
             }
     }
-
+    /* Integration testing sample block */
     getUserId(){
-        //debugger;
         try{
         return axios({
             method: 'post',

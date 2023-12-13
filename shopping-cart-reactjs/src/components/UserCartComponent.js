@@ -17,8 +17,8 @@ function UserCartComponent({
     const getPromo =()=>{
         cartService.getPromotions().then((response) => {
           setPromo(response.data)
-         console.log("promo --->"+JSON.stringify(response.data))
-          console.log("promo --->"+JSON.stringify(promo))
+         //console.log("promo --->"+JSON.stringify(response.data))
+         // console.log("promo --->"+JSON.stringify(promo))
         });
       };
 

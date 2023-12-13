@@ -4,25 +4,16 @@ import { useNavigate } from 'react-router-dom';
 
 function TotalCartComponent({
     cartCourses,
-    deleteCourseFromCartFunction,
     totalAmountCalculationFunction,
-    SaveToCartFunction,
-    saveForLaterFunction,
-    removeFromCartFunction,
-    setCartCourses,
-}) {
+    })
+    {
     const [discountApplied, setDiscountApplied] = useState(false);
     const [promotionApplied, setPromotionApplied] = useState(false);
     const navigate = useNavigate();
 
     const handleCheckout = () => {
-      // Perform any necessary actions before redirecting (e.g., saving data, clearing the cart)
-      
-      // Redirect to the empty page
       navigate('/empty-page');
     };
-
-    
 
     const applyDiscount = () => {
         // Set the discount applied flag to true
@@ -55,7 +46,15 @@ function TotalCartComponent({
             </div>
 
             <div className="total">
-                <span> promoCode: </span>
+                
+                {promotionApplied ? (
+                         <span> </span>
+                    ) : (
+                     <div>
+                 <p>Eligible for 10% discount</p>
+        </div>
+      )}
+
             </div>
             <div className="total1">
                 {discountApplied ? (
@@ -65,10 +64,10 @@ function TotalCartComponent({
                                 Congratulations !! Promotion Applied
                             </div>
                         )}
-                        <button onClick={removeDiscount}>Remove</button>
+                        <button className='Promo' onClick={removeDiscount}>Remove</button>
                     </>
                 ) : (
-                    <button onClick={applyDiscount}>Apply</button>
+                    <button className='Promo' onClick={applyDiscount}>Apply</button>
                 )}
             </div>
 

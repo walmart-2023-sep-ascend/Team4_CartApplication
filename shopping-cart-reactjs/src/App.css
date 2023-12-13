@@ -40,6 +40,13 @@ body {
   margin-bottom: 50px;
 }
 
+.Promo{
+  border: 'none';
+  color : 'green';
+  background: 'none';
+  cursor: 'pointer',
+}
+
 /* Search Component */
 .search-bar {
   width: 100%;
