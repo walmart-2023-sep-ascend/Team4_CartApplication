@@ -4,21 +4,14 @@ import cartService from '../services/cartService';
 function UserCartComponent({
     cartCourses,
     deleteCourseFromCartFunction,
-    totalAmountCalculationFunction,
-    totalAmountdiscountFunction,
-    SaveToCartFunction,
     saveForLaterFunction,
-    removeFromCartFunction,
     setCartCourses,
-    getCart
 }) {
 
     const [promo, setPromo] = useState([])
     const getPromo =()=>{
         cartService.getPromotions().then((response) => {
           setPromo(response.data)
-         //console.log("promo --->"+JSON.stringify(response.data))
-         // console.log("promo --->"+JSON.stringify(promo))
         });
       };
 

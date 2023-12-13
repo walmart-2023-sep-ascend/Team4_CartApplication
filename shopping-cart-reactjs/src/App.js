@@ -14,26 +14,18 @@ const date = new Date();
 
  
 function App() {
-let userId=38;  //default value
-let userEmail='test@gmail.com' //default value 
+let userId=38;  //default value for testing
+let userEmail='test@gmail.com' //default value  for testing
 
  const location = useLocation();
  const queryParams = new URLSearchParams(location.search);
-
- const isEmptyMethod1 = queryParams.has('id');
-
- console.log("isEmptyMethod1"+isEmptyMethod1)
-
- if(isEmptyMethod1){
+ const isEmpty = queryParams.has('id');
+ if(isEmpty){
    userId = queryParams.get('id');
    userEmail = queryParams.get('email');
  }
 
-     
 
-   //const userId = 55;
-   // const userEmail = 'adam@gmail.com';
-  var itemQty;
   const ADD_SERVICE_URL="http://localhost:8080/cart/addToCart";
 
     const [courses] = useState([
@@ -108,35 +100,13 @@ let userEmail='test@gmail.com' //default value
     const getUserId =()=>{
       cartService.getUserId().then((response) => {
           setUserInfo(response.data)
-          //userInfo=response.data.userId;
-        //  const cookies = document.cookie
-          console.log("user Response ->"+JSON.stringify(response.data))
-        //  console.log("userInfo = "+response.data.userId)
-          
       });
 
-     
-      
-     // getUserProfile();
     };
 
-  /*  const getUserProfile=()=>{
-      cartService.getUserProfile().then((response) => {
-        setUserInfo(response.data)
-        //const cookies = document.cookie
-        console.log("user Response ->"+JSON.stringify(response.data))
-       // console.log("cookie :"+cookies)
-        
-    });
-    console.log("userInfo ->-> "+userInfo.id)
-    }; */
+
 
     useEffect(() => {
-    console.log('userId:', userId);
-    console.log('param2:', userEmail);
-
-     // getUserId();
-     // console.log("user id -"+userInfo.userId)
       if(userId!==undefined)
          getCart(userId)
     }, [userId, userEmail])
@@ -183,7 +153,6 @@ let userEmail='test@gmail.com' //default value
             {
               addItem(course,alreadyCourses.quantity)
             } ;
-            //console.log("alreadyCourses-->"+JSON.stringify(alreadyCourses))
             setCartCourses(latestCartUpdate);
           
             

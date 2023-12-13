@@ -8,7 +8,7 @@ const USER_PROFILE_URL="http://52.142.30.237:9003/api/test/profile"
 const PROMO_SERVICE_URL="http://20.127.159.231:9300/promotions/active"
 const REMOVE_ITEM_URL="http://20.127.159.231:9300/cart/remove"
 const MOVE_TO_WISHLIST_URL="http://20.127.159.231:9300/cart/moveFromCartToWish"
-const CART_URL="http://20.127.159.231:9300/cart/"
+//const CART_URL="http://20.127.159.231:9300/cart/"
 const PRODUCT_SERVICE="http://20.127.159.231:9300//item/fetchItemId/"
 const authKey="Token="
 
@@ -26,7 +26,7 @@ class CartService{
 
     getItem = async(pId) =>{
         console.log("product id->"+pId)
-        const fetchItem =CART_SERVICE_URL+pId;
+        const fetchItem =PRODUCT_SERVICE+pId;
         return axios.get(fetchItem);
     }
 
