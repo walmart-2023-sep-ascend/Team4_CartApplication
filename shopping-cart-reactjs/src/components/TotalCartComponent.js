@@ -13,7 +13,14 @@ function TotalCartComponent({
 }) {
     const [discountApplied, setDiscountApplied] = useState(false);
     const [promotionApplied, setPromotionApplied] = useState(false);
-    
+    const navigate = useNavigate();
+
+    const handleCheckout = () => {
+      // Perform any necessary actions before redirecting (e.g., saving data, clearing the cart)
+      
+      // Redirect to the empty page
+      navigate('/empty-page');
+    };
 
     
 
@@ -48,7 +55,7 @@ function TotalCartComponent({
             </div>
 
             <div className="total">
-                <span>Eligible for 10% discount</span>
+                <span> promoCode: </span>
             </div>
             <div className="total1">
                 {discountApplied ? (
@@ -89,10 +96,9 @@ function TotalCartComponent({
             </div>
 
             <button
-            className="checkout-button"
-            disabled={cartCourses.length === 0 ||
-            totalAmountCalculationFunction() === 0}
- 
+  className="checkout-button"
+  disabled={cartCourses.length === 0 || totalAmountCalculationFunction() === 0}
+  onClick={handleCheckout}
 >
   Continue to checkout
 </button>

@@ -10,7 +10,6 @@ import cartService from './services/cartService';
 
 const date = new Date();
 
-
 //import TotalCartComponent from './components/TotalCartComponent';
 
 
@@ -252,10 +251,7 @@ function App() {
     return (
             <div className="App">
             
-                <SearchComponent searchCourse={searchCourse}
-                             courseSearchUserFunction=
-                                 {courseSearchUserFunction} 
-                />
+               
 
 
                  <main className="App-main">
