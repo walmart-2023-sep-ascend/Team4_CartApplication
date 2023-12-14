@@ -7,6 +7,7 @@ function UserCartComponent({
     saveForLaterFunction,
     increaseQtyFunction,
     decreaseQtyFunction,
+    TotalCartComponent,
     setCartCourses,
 }) {
 

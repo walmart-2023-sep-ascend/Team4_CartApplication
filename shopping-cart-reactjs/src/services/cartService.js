@@ -10,6 +10,7 @@ const REMOVE_ITEM_URL="http://20.127.159.231:9300/cart/remove"
 const MOVE_TO_WISHLIST_URL="http://20.127.159.231:9300/cart/moveFromCartToWish"
 //const CART_URL="http://20.127.159.231:9300/cart/"
 const PRODUCT_SERVICE="http://20.127.159.231:9300//item/fetchItemId/"
+const DISCOUNT_SERVICE_URL="http://172.203.170.91:9400/promotion/getActivePromotionsByPromocode/"
 const authKey="Token="
 
 const date = new Date();
@@ -129,6 +130,15 @@ class CartService{
         console.log("PROMO_SERVICE_URL->"+PROMO_SERVICE_URL)
         return axios.get(PROMO_SERVICE_URL); 
     }
+
+    getDiscount(promo)
+    {
+       
+        const fetchDiscount=DISCOUNT_SERVICE_URL+promo
+        console.log("DISCOUNT_SERVICE_URL->"+fetchDiscount)
+        return axios.get(fetchDiscount); 
+    }
+
     addItems(course,quantity,uId,cartPrice){
       //  console.log("product",course.id);
       //  console.log("product",uId);
@@ -154,5 +164,7 @@ class CartService{
 
           console.log("inside cartservice")
     }  
+
+    
 }
 export default new CartService();
