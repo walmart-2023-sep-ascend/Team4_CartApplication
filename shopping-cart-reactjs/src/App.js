@@ -112,12 +112,17 @@ let userEmail='test@gmail.com' //default value  for testing
     }, [userId, userEmail])
 
     const addItem =(course,quantity) =>{
-      const cartPrice=totalAmountCalculationFunction();
-     console.log("add item to cart "+course+quantity+userId+cartPrice)
+
+     
+     console.log("add item to cart "+quantity)
+    
+        const cartPrice=totalAmountCalculationFunction();
       cartService.addItems(course,quantity,userId,cartPrice).then((response) => {
           setCartItem(response.data)
 
       });
+      
+
     };
     
 
@@ -190,8 +195,8 @@ let userEmail='test@gmail.com' //default value  for testing
     const decreaseQtyFunction = (course) => {
       const alreadyCourses = cartCourses
           .find(item => item.product.id === course.id);
+      
       if (alreadyCourses) {
-      console.log("item alreay present in cart ")
       const latestCartUpdate = cartCourses.map(item =>
       item.product.id === course.id ? 
       {
@@ -199,16 +204,16 @@ let userEmail='test@gmail.com' //default value  for testing
       }
       : item,
       );  
+      if(alreadyCourses.quantity-1>0){
       {
           addItem(course,alreadyCourses.quantity-1)
       } ;
-      //console.log("alreadyCourses-->"+JSON.stringify(alreadyCourses))
       setCartCourses(latestCartUpdate);
-      } else {
-      console.log("new item added to cart ")
-      setCartCourses([...cartCourses, {product: course, quantity: 0}]);
-      addItem(course,0)
+      } else{
+        
+        deleteCourseFromCartFunction(course) 
       }
+    }
       };
 
             const saveForLaterFunction = (Course) => {
