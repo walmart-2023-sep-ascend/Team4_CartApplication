@@ -39,12 +39,12 @@ function TotalCartComponent({
       .catch(error => {
         if (error.response) {
           setErrorMessage('Sorry!! Invalid promo code');
-          console.log(errorMessag);
+         // console.log(errorMessag);
           setInvalid(true);
           setDiscount(0);
         } else if (error.request) {
-          console.error('No response received:', error.request);
-          setErrorMessage('No response received from the server. Please check your internet connection.');
+         // console.error('No response received:', error.request);
+          setErrorMessage('Please Enter a Valid PromoCode');
           setInvalid(true);
           setDiscount(0);
         } else {
