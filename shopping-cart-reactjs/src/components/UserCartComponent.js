@@ -102,7 +102,7 @@ function UserCartComponent({
                                         <h3>{item.product.name}</h3>
                                         
 
-                                        <p> Price: <del>₹{item.product.price} </del> ₹{Math.round(item.product.price * (1 - item.product.discount/100 ))} </p>
+                                        <p> Price: ₹{item.product.price}  </p>
 
 
                                         

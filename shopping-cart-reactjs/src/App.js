@@ -44,8 +44,8 @@ let userEmail='test@gmail.com' //default value  for testing
           name: 'Bag',
           price: 699,
           qty:0,
-          discount: 9.9,
-          offers: <span><img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" class="_3HLfAg"></img> 9.9% off for this product </span>,
+          discount: 5,
+          offers: <span><img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" class="_3HLfAg"></img> 5% off for this product </span>,
           image:
 'https://i5.walmartimages.com/asr/5096b486-7ff4-40a1-bea8-9a8628a98064.de58f66b864bb20049dc115ed046881a.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF'
         },
@@ -62,8 +62,8 @@ let userEmail='test@gmail.com' //default value  for testing
             name: 'Bike',
             price: 15000,
             qty:0,
-            discount: 11,
-            offers: <span><img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" class="_3HLfAg"></img> 11% off for this product </span>,
+            discount: 20,
+            offers: <span><img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" class="_3HLfAg"></img> 20% off for this product </span>,
             image:
   'https://i5.walmartimages.com/seo/MOPHOTO-7-Speed-27-5-Adult-Mountain-Tricycle-Exercise-Men-s-Women-s-Bicycle-3-Wheel-Cruiser-Bike_7440d07d-8fbe-47f7-9b93-97951656d3a8.b21a0a7044df3f88e31c276d24527d11.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF'
           },
@@ -71,8 +71,8 @@ let userEmail='test@gmail.com' //default value  for testing
             name: 'Watch',
             price: 1200,
             qty:0,
-            discount: 20,
-            offers: <span><img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" class="_3HLfAg"></img> 20% off for this product </span>,
+            discount: 10,
+            offers: <span><img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" class="_3HLfAg"></img> 10% off for this product </span>,
             image:
   'https://i5.walmartimages.com/seo/Apple-Watch-Series-9-GPS-Cellular-41mm-Midnight-Aluminum-Case-with-Midnight-Sport-Band-M-L_c21b6028-acd1-4040-8388-98ae5bec8027.ae88dd0027f97ad3039ec4827ef9d66f.jpeg?odnHeight=96&amp;odnWidth=96&amp;odnBg=FFFFFF 1x, https://i5.walmartimages.com/seo/Apple-Watch-Series-9-GPS-Cellular-41mm-Midnight-Aluminum-Case-with-Midnight-Sport-Band-M-L_c21b6028-acd1-4040-8388-98ae5bec8027.ae88dd0027f97ad3039ec4827ef9d66f.jpeg?odnHeight=144&amp;odnWidth=144&amp;odnBg=FFFFFF 2x'
           }
@@ -258,7 +258,7 @@ let userEmail='test@gmail.com' //default value  for testing
   const totalAmountCalculationFunction = () => {
     return cartCourses
            .reduce((total, item) =>
-                       total + Math.round(item.product.price * (1 - item.product.discount/100 )) * item.quantity, 0);
+                       total + Math.round(item.product.price ) * item.quantity, 0);
 };
 
     const totalAmountdiscountFunction = () => {
